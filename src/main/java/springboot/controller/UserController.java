@@ -1,6 +1,7 @@
 package springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -12,6 +13,7 @@ import springboot.service.UserService;
 import springboot.model.User;
 
 @Controller
+@ComponentScan("service")
 public class UserController {
 
     private final UserService userService;
@@ -28,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/new")
-    public String newUser(Model model){
+    public String newUserForm(Model model){
         User user = new User();
         model.addAttribute("user", user);
         return "new";
@@ -41,7 +43,7 @@ public class UserController {
     }
 
     @GetMapping("/edit")
-    public String edit(@RequestParam(value = "id") int id, Model model) {
+    public String editUserForm(@RequestParam(value = "id") int id, Model model) {
         model.addAttribute("user", userService.findById(id));
         return "/edit";
     }
