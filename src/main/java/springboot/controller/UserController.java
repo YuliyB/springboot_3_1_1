@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/new")
-    public String newUserForm(Model model){
+    public String showNewUserForm(Model model){
         User user = new User();
         model.addAttribute("user", user);
         return "new";
@@ -43,14 +43,14 @@ public class UserController {
     }
 
     @GetMapping("/edit")
-    public String editUserForm(@RequestParam(value = "id") int id, Model model) {
+    public String showEditUserForm(@RequestParam(value = "id") int id, Model model) {
         model.addAttribute("user", userService.findById(id));
         return "/edit";
     }
 
     @PostMapping("/updateUser")
     public String update(@ModelAttribute("user") User user) {
-        userService.saveUser(user);
+        userService.updateUser(user);
         return "redirect:/";
     }
 

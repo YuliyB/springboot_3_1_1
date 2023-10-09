@@ -33,6 +33,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User updateUser(User user) {
+        User userDB = userRepository.findById(user.getId()).orElse(null);
+        userDB.setAge(user.getAge());
+        userDB.setName(user.getName());
+        userDB.setLastName(user.getLastName());
+        return userRepository.save(userDB);
+    }
+
+    @Override
     public void deleteById(long id) {
         userRepository.deleteById(id);
     }
